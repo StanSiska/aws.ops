@@ -1,0 +1,29 @@
+# https://circleci.com/docs/2.0
+
+version: 2
+jobs:
+
+  manage_ops_buckets:
+      docker:
+        - image: circleci/node:8.10
+      working_directory: ~/aws.ops/
+      steps:
+        - checkout
+        - run:
+            name: Install Terraform
+            command: |
+              sudo wget -O terraform.zip https://releases.hashicorp.com/terraform/0.11.8/terraform_0.11.8_linux_amd64.zip
+              sudo unzip terraform.zip -d /usr/local/bin
+        - deploy:
+            name: Terraform INIT, PLAN and APPLY
+            working_directory: ~/aws.ops/terraform
+            command: |
+              terraform init
+              terraform plan -input=false
+              terraform apply -auto-approve
+
+workflows:
+  version: 2
+  build-test-and-deploy:
+    jobs:
+      - manage_ops_buckets
