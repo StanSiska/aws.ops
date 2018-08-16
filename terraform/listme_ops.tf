@@ -9,7 +9,7 @@ resource "aws_s3_bucket" "listmelogs" {
 
 resource "aws_s3_bucket" "listmeops" {
   depends_on = ["aws_s3_bucket.listmelogs"]
-  bucket = "vvc.listme"
+  bucket = "vvc.listme.ops"
   acl    = "private"
 
   versioning {
