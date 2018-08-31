@@ -1,6 +1,7 @@
 resource "aws_kms_key" "listmeops" {
   description             = "This key is used to encrypt bucket objects"
   deletion_window_in_days = 10
+  alias                   = "ListMe OPS bucket key"
 }
 
 resource "aws_kms_alias" "listmeops" {
@@ -11,6 +12,7 @@ resource "aws_kms_alias" "listmeops" {
 resource "aws_kms_key" "listmelogs" {
   description             = "This key is used to encrypt bucket objects"
   deletion_window_in_days = 10
+  alias                   = "ListMe LOGS bucket key"
 }
 
 resource "aws_kms_alias" "listmelogs" {
