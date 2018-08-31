@@ -5,7 +5,7 @@ resource "aws_kms_key" "listmeops" {
 }
 
 resource "aws_kms_alias" "listmeops" {
-  name          = "vvc/listme/ops"
+  name          = "alias/listme/ops"
   target_key_id = "${aws_kms_key.listmeops.key_id}"
 }
 
@@ -15,7 +15,7 @@ resource "aws_kms_key" "listmelogs" {
 }
 
 resource "aws_kms_alias" "listmelogs" {
-  name          = "vvc/listme/logs"
+  name          = "alias/listme/logs"
   target_key_id = "${aws_kms_key.listmelogs.key_id}"
 }
 
@@ -25,7 +25,7 @@ resource "aws_kms_key" "secretmanagement" {
 }
 
 resource "aws_kms_alias" "secretmanagement" {
-  name          = "vvc/listme/secrets"
+  name          = "alias/listme/secrets"
   target_key_id = "${aws_kms_key.secretmanagement.key_id}"
 }
 
