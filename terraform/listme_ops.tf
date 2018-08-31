@@ -3,14 +3,30 @@ resource "aws_kms_key" "listmeops" {
   deletion_window_in_days = 10
 }
 
+resource "aws_kms_alias" "listmeops" {
+  name          = "vvc/listme/ops"
+  target_key_id = "${aws_kms_key.listmeops.key_id}"
+}
+
 resource "aws_kms_key" "listmelogs" {
   description             = "This key is used to encrypt bucket objects"
   deletion_window_in_days = 10
 }
 
+resource "aws_kms_alias" "listmelogs" {
+  name          = "vvc/listme/logs"
+  target_key_id = "${aws_kms_key.listmelogs.key_id}"
+}
+
 resource "aws_kms_key" "secretmanagement" {
   description             = "This key is used to encrypt secrets"
   deletion_window_in_days = 10
+  alias                   = "ListMe secrets key"
+}
+
+resource "aws_kms_alias" "secretmanagement" {
+  name          = "vvc/listme/secrets"
+  target_key_id = "${aws_kms_key.secretmanagement.key_id}"
 }
 
 resource "aws_s3_bucket" "listmelogs" {
